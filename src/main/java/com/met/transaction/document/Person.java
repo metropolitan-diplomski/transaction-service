@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class Person {
     @NotEmpty
-    private String accountNumber;
+    private Long accountNumber;
     @NotEmpty
     private String fullName;
     @NotEmpty
