@@ -21,7 +21,7 @@ public class TransactionController {
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    @PostMapping()
+    @PostMapping("/")
     ResponseEntity<Transaction> createTransaction(HttpServletRequest request, @Valid @RequestBody Transaction transaction) {
         String authToken = request.getHeader(this.tokenHeader);
         return ResponseEntity.ok(transactionService.createTransaction(transaction, authToken));
@@ -32,7 +32,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.getById(id));
     }
 
-    @GetMapping
+    @GetMapping("/")
     ResponseEntity<?> search(
             @RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "accountNumber", required = false) Long accountNumber) {
