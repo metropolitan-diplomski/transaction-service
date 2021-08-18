@@ -24,7 +24,7 @@ public class Transaction {
     @NotNull
     private Integer transactionCode;
     private String identifier;
-    private Double amount;
+    private Double n;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime transactionTime;
