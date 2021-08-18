@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
+@RequestMapping("/trs")
 public class TransactionController {
 
     @Autowired
@@ -21,18 +22,18 @@ public class TransactionController {
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    @PostMapping("/")
+    @PostMapping("/create")
     ResponseEntity<Transaction> createTransaction(HttpServletRequest request, @Valid @RequestBody Transaction transaction) {
         String authToken = request.getHeader(this.tokenHeader);
         return ResponseEntity.ok(transactionService.createTransaction(transaction, authToken));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/by-id/{id}")
     ResponseEntity<Transaction> getById(@PathVariable("id") String id) {
         return ResponseEntity.ok(transactionService.getById(id));
     }
 
-    @GetMapping("/")
+    @GetMapping("/search")
     ResponseEntity<?> search(
             @RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "accountNumber", required = false) Long accountNumber) {

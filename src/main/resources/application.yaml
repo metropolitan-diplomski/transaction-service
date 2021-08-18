@@ -1,5 +1,4 @@
-
-erver:
+server:
   port: 3004
   servlet:
     context-path: /transaction
