@@ -17,7 +17,7 @@ public class TransactionControllerAdvice extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(value
             = {TransactionServiceException.class})
-    protected ResponseEntity<ErrorResponse> handleNotFound(
+    protected ResponseEntity<ErrorResponse> handleTransactionException(
             TransactionServiceException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getErrorCode(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
@@ -33,9 +33,17 @@ public class TransactionControllerAdvice extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(value
             = {ValidationException.class})
-    protected ResponseEntity<ErrorResponse> handleNotFound(
+    protected ResponseEntity<ErrorResponse> handleValidation(
             ValidationException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(ErrorCode.VALIDATION_EXCEPTION, ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(value
+            = {Exception.class})
+    protected ResponseEntity<ErrorResponse> handleGeneral(
+            Exception ex, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorCode.GENERAL_ERROR, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 }
