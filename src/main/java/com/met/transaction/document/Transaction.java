@@ -29,3 +29,4 @@ public class Transaction {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime transactionTime;
 }
+

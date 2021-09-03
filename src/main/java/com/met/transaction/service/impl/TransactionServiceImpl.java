@@ -29,7 +29,8 @@ public class TransactionServiceImpl implements TransactionService {
         executeTransactionRequest.setAccountTo(transaction.getRecipient().getAccountNumber());
         executeTransactionRequest.setAmount(transaction.getAmount());
 
-        ExecuteTransactionResponse executeTransactionResponse = accountServiceApi.execute(token, executeTransactionRequest);
+        ExecuteTransactionResponse executeTransactionResponse =
+                accountServiceApi.execute(token, executeTransactionRequest);
 
         if (executeTransactionResponse.isSuccess()) {
             transaction.getSender().setUserId(executeTransactionResponse.getFromId());
@@ -37,7 +38,9 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.setTransactionTime(LocalDateTime.now());
             return transactionRepository.save(transaction);
         } else {
-            throw new TransactionServiceException(ErrorCode.FAILED_TRANSACTION, executeTransactionResponse.getErrorMessage());
+            throw new TransactionServiceException(
+                    ErrorCode.FAILED_TRANSACTION, executeTransactionResponse.getErrorMessage()
+            );
         }
     }
 

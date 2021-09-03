@@ -23,7 +23,9 @@ public class TransactionController {
     private String tokenHeader;
 
     @PostMapping("/create")
-    ResponseEntity<Transaction> createTransaction(HttpServletRequest request, @Valid @RequestBody Transaction transaction) {
+    ResponseEntity<Transaction> createTransaction(
+            HttpServletRequest request,
+            @Valid @RequestBody Transaction transaction) {
         String authToken = request.getHeader(this.tokenHeader);
         return ResponseEntity.ok(transactionService.createTransaction(transaction, authToken));
     }
